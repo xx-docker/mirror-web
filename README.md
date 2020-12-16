@@ -58,24 +58,62 @@ wget https://mirrors.tuna.tsinghua.edu.cn/static/status/isoinfo.json -O static/s
 
 之后 `jekyll serve` 即可运行 demo.
 
-## 贡献文档
 
-### 基本步骤
+# queckstart 
 
-1. Fork 本项目并 clone
-2. 创建分支 `git checkout -b foo-doc`
-3. 在 `_posts/help` 中建立文档文件，文件名格式为 `年-月-日-名称.md`
-4. 用 markdown 语法编写文档
-5. 提交并推送代码
-6. 发送 Pull Request
+```bash
 
-### 写作规范
+docker run -itd \
+    --name=web \
+    --net=host \
+    --restart=always \
+    -v /home/mirror-web/:/data \
+    -v /etc/localtime:/etc/localtime:ro \
+    registry.cn-beijing.aliyuncs.com/anglecv/mirror-web:v1 \
+    jekyll serve
 
-1. 对于相对不知名的镜像项目，首先用一两句话介绍该项目
-2. 写明使用方法, 使用 Github Flavored Markdown 格式
-3. 中英文字符间应留一个空格
+```
 
-### 特殊用法
 
-#### 表单选择
-例如 <http://mirrors.tuna.tsinghua.edu.cn/help/tensorflow/> 中，通过表单选择操作系统和版本号，建议直接使用 Vue.js
+## nginx编译后生成
+
+```bash
+
+load_module modules/ngx_http_js_module.so;
+load_module modules/ngx_http_fancyindex_module.so;
+
+map $http_user_agent $isbrowser {
+ default 0;
+ "~*validation server" 0;
+ "~*mozilla" 1;
+}
+
+fancyindex_header /fancy-index/before;
+fancyindex_footer /fancy-index/after;
+fancyindex_exact_size off;
+fancyindex_time_format "%d %b %Y %H:%M:%S +0000";
+fancyindex_name_length 256;
+
+error_page 404 /404.html;
+
+location /fancy-index {
+ internal;
+ root /path/to/mirror-web/_site;
+ subrequest_output_buffer_size 100k;
+ location = /fancy-index/before {
+   js_content fancyIndexBeforeRender;
+ }
+ location = /fancy-index/after {
+   js_content fancyIndexAfterRender;
+ }
+}
+
+js_path /path/to/mirror-web/static/njs;
+js_include /path/to/mirror-web/static/njs/all.njs;
+
+location / {
+ root /path/to/mirrors;
+ fancyindex on;
+}
+
+```

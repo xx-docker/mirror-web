@@ -6,27 +6,27 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: 清华大学开源软件镜像站
+title: 天融信开源软件镜像站
 # title: 北京外国语大学开源软件镜像站
-school: 清华大学
+school: 天融信
 # school: 北京外国语大学
 brand: Tsinghua Open Source Mirror
-operator: 清华大学信息化技术中心
+operator: 天融信大数据技术中心
 # operator: 北外信息技术中心
 logo: true
 meow_404: true
-issue_tag: tuna
+issue_tag: tsc
 baseurl: "" # the subpath of your site, e.g. /blog
 permalink: "/:categories/:title/"
-url: "https://mirrors.tuna.tsinghua.edu.cn"
-hostname: "mirrors.tuna.tsinghua.edu.cn"
-urlv4: "https://mirrors4.tuna.tsinghua.edu.cn"
-urlv6: "https://mirrors6.tuna.tsinghua.edu.cn"
-aosp: "aosp.tuna.tsinghua.edu.cn"
-arch_archive: "arch-archive.tuna.tsinghua.edu.cn"
-aur: "aur.tuna.tsinghua.edu.cn"
-pypi: "pypi.tuna.tsinghua.edu.cn"
-homelink: "https://tuna.moe"
+url: "http://mirrors.topsec.com.cn"
+hostname: "mirrors.topsec.com.cn"
+urlv4: "http://mirrors4.topsec.com.cn"
+urlv6: "http://mirrors6.topsec.com.cn"
+aosp: "aosp.topsec.com.cn"
+arch_archive: "arch-archive.topsec.com.cn"
+aur: "aur.topsec.com.cn"
+pypi: "pypi.topsec.com.cn"
+homelink: "https://www.topsec.com.cn"
 hide_navbar: false
 hide_download: false
 hide_server_status: false
